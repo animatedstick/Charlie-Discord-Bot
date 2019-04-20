@@ -26,7 +26,7 @@ async def on_ready():
     print("Name: {}".format(bot.user.name))
     print("ID: {}".format(bot.user.id))
     print("Users: {}".format(len(set(bot.get_all_members()))))
-    await bot.change_presence(game=discord.Game(name="c!help | {} Users ".format(len(set(bot.get_all_members()))),type=3))
+    await bot.change_presence(activity=discord.Game(name="c!help | {} Users ".format(len(set(bot.get_all_members()))),type=3))
 
 
 @bot.event
