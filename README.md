@@ -1,2 +1,2 @@
 # Charlie
-A Discord Bot!
+Some Random Code XD
