@@ -53,7 +53,7 @@ async def on_ready():
 
 @bot.command()
 async def bug(ctx,*,bug:str):
-    if sug == None:
+    if bug == None:
         await ctx.author.send('Please Mention the Bug `c!bug [bug]`')
     
     else:
