@@ -55,9 +55,9 @@ class Moderation(commands.Cog, name='Moderation Commands'):
             deleted = await ctx.channel.purge(limit=amount+1)
             embed=discord.Embed()
             embed.add_field(name="Deleted", value="**{}** Messages Deleted!\n**Admin/Moderator:** {}".format(len(deleted),ctx.message.author.name), inline=True)
-            x = await ctx.send(embed=embed)
+            await ctx.send(embed=embed)
             await asyncio.sleep(3)
-            await ctx.message.delete(x)
+            await ctx.message.delete()
 
     @commands.command(name='rename', aliases = ["reset","setnick","resetnick"])
     @commands.has_permissions(manage_nicknames=True)
