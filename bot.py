@@ -4,7 +4,6 @@ import sys, traceback
 import datetime
 import time
 import asyncio
-import os
 
 bot = discord.Client()
 prefix = 'c!' , 'C!' ,'charlie ','c' , '<@568492275504775178> ' 
@@ -21,6 +20,7 @@ initial_extensions = ['cogs.mod',
                       'cogs.owner',
                       'cogs.fun',
                       'cogs.info',
+                      'cogs.events',
                       'cogs.tanki',
                       'cogs.help']
                       
@@ -48,6 +48,30 @@ async def on_ready():
     bot.loop.create_task(status_task())
     #await client.change_presence(status=discord.Status.idle, activity=game)
     #await bot.change_presence(activity=discord.Game(name="c!help | {} Users ".format(len(set(bot.get_all_members()))), type=1, url='https://www.twitch.tv/animatedstick'))
+
+@bot.command()
+async def bug(ctx,*,bug:str):
+    if sug == None:
+        await ctx.author.send('Please Mention the Bug `c!bug [bug]`')
+    
+    else:
+       chan = bot.get_channel(572760775530119180)
+       embed=discord.Embed()
+       embed.add_field(name="Bug Report!!", value=f"**User :** {ctx.author}\n**Server :** {ctx.guild.name}\n**Bug :** {bug}", inline=True)
+       embed.timestamp = datetime.datetime.utcnow()
+       await chan.send(embed=embed)
+
+@bot.command()
+async def suggestion(ctx,*,sug:str):
+    if sug == None:
+        await ctx.author.send('Please Mention a Suggestion `c!suggest [suggestion]`')
+    
+    else:
+        chan = bot.get_channel(572761324359122951)
+        embed=discord.Embed()
+        embed.add_field(name="Suggestion!", value=f"**User :** {ctx.author}\n**Server :** {ctx.guild.name}\n**Suggestion :** {sug}", inline=True)
+        embed.timestamp = datetime.datetime.utcnow()
+        await chan.send(embed=embed)
 
 @bot.command()
 async def usages(ctx):
@@ -80,21 +104,27 @@ async def uptime(ctx):
 @bot.event
 async def on_command_error(ctx,error):
     try:
-        user = ctx.message.author
-        embed=discord.Embed(title="Support Server Link", url="https://discord.gg/DyPu726", description="```py{}```".format(error))
-        embed.set_author(name="The Following Error Ocurred ", icon_url=ctx.message.author.avatar_url)
-        embed.timestamp = datetime.datetime.utcnow()
-        embed.set_footer(text="Charlie Discord Bot" ,icon_url=bot.user.avatar_url)
-        await user.send(embed=embed)
-        await user.send('Support Server Link: https://discord.gg/DyPu726')
+        if isinstance(error, commands.CommandNotFound):
+            return
+        else:
+            user = ctx.message.author
+            embed=discord.Embed(title="Support Server Link", url="https://discord.gg/DyPu726", description="```\n{}\n```".format(error))
+            embed.set_author(name="The Following Error Ocurred ", icon_url=ctx.message.author.avatar_url)
+            embed.timestamp = datetime.datetime.utcnow()
+            embed.set_footer(text="Charlie Discord Bot" ,icon_url=bot.user.avatar_url)
+            await user.send(embed=embed)
+            await user.send('Support Server Link: https://discord.gg/xutQNJB')
        
     except:
-        embed=discord.Embed(title="Support Server Link", url="https://discord.gg/DyPu726", description="```py{}```".format(error))
-        embed.set_author(name="The Following Error Ocurred ", icon_url=ctx.message.author.avatar_url)
-        embed.timestamp = datetime.datetime.utcnow()
-        embed.set_footer(text="Charlie Discord Bot" ,icon_url=bot.user.avatar_url)
-        await ctx.send(embed=embed)
-        await ctx.send('Support Server Link: https://discord.gg/DyPu726')
+        if isinstance(error, commands.CommandNotFound):
+            return
+        else:
+            embed=discord.Embed(title="Support Server Link", url="https://discord.gg/DyPu726", description="```py{}```".format(error))
+            embed.set_author(name="The Following Error Ocurred ", icon_url=ctx.message.author.avatar_url)
+            embed.timestamp = datetime.datetime.utcnow()
+            embed.set_footer(text="Charlie Discord Bot" ,icon_url=bot.user.avatar_url)
+            await ctx.send(embed=embed)
+            await ctx.send('Support Server Link: https://discord.gg/xutQNJB')
 
 
 async def charlie_uptime():
