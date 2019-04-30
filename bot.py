@@ -21,7 +21,6 @@ initial_extensions = ['cogs.mod',
                       'cogs.owner',
                       'cogs.fun',
                       'cogs.info',
-                      'cogs.events',
                       'cogs.tanki',
                       'cogs.help']
                       
