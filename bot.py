@@ -57,6 +57,7 @@ async def bug(ctx,*,bug:str):
         await ctx.author.send('Please Mention the Bug `c!bug [bug]`')
     
     else:
+       await ctx.message.delete()
        chan = bot.get_channel(572760775530119180)
        embed=discord.Embed()
        embed.add_field(name="Bug Report!!", value=f"**User :** {ctx.author}\n**Server :** {ctx.guild.name}\n**Bug :** {bug}", inline=True)
@@ -64,11 +65,12 @@ async def bug(ctx,*,bug:str):
        await chan.send(embed=embed)
 
 @bot.command()
-async def suggestion(ctx,*,sug:str):
+async def suggest(ctx,*,sug:str):
     if sug == None:
         await ctx.author.send('Please Mention a Suggestion `c!suggest [suggestion]`')
     
     else:
+        await ctx.message.delete()
         chan = bot.get_channel(572761324359122951)
         embed=discord.Embed()
         embed.add_field(name="Suggestion!", value=f"**User :** {ctx.author}\n**Server :** {ctx.guild.name}\n**Suggestion :** {sug}", inline=True)
