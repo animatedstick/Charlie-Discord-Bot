@@ -4,6 +4,7 @@ import sys, traceback
 import datetime
 import time
 import asyncio
+import os 
 
 bot = discord.Client()
 prefix = 'c!' , 'C!' ,'charlie ','c' , '<@568492275504775178> ' 
@@ -22,7 +23,8 @@ initial_extensions = ['cogs.mod',
                       'cogs.info',
                       'cogs.events',
                       'cogs.tanki',
-                      'cogs.help']
+                      'cogs.help',
+                      'cogs.events]
                       
 
 async def status_task():
