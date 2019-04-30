@@ -77,24 +77,24 @@ async def uptime(ctx):
 
 
 
-#@bot.event
-#async def on_command_error(ctx,error):
-#    try:
-#        user = ctx.message.author
-#        embed=discord.Embed(title="Support Server Link", url="https://discord.gg/DyPu726", description="```py{}```".format(error))
-#        embed.set_author(name="The Following Error Ocurred ", icon_url=ctx.message.author.avatar_url)
-#        embed.timestamp = datetime.datetime.utcnow()
-#        embed.set_footer(text="Charlie Discord Bot" ,icon_url=bot.user.avatar_url)
-#        await user.send(embed=embed)
-#        await user.send('Support Server Link: https://discord.gg/DyPu726')
-#       
-#    except:
-#        embed=discord.Embed(title="Support Server Link", url="https://discord.gg/DyPu726", description="```py{}```".format(error))
-#        embed.set_author(name="The Following Error Ocurred ", icon_url=ctx.message.author.avatar_url)
-#        embed.timestamp = datetime.datetime.utcnow()
-#        embed.set_footer(text="Charlie Discord Bot" ,icon_url=bot.user.avatar_url)
-#        await ctx.send(embed=embed)
-#        await ctx.send('Support Server Link: https://discord.gg/DyPu726')
+@bot.event
+async def on_command_error(ctx,error):
+    try:
+        user = ctx.message.author
+        embed=discord.Embed(title="Support Server Link", url="https://discord.gg/DyPu726", description="```py{}```".format(error))
+        embed.set_author(name="The Following Error Ocurred ", icon_url=ctx.message.author.avatar_url)
+        embed.timestamp = datetime.datetime.utcnow()
+        embed.set_footer(text="Charlie Discord Bot" ,icon_url=bot.user.avatar_url)
+        await user.send(embed=embed)
+        await user.send('Support Server Link: https://discord.gg/DyPu726')
+       
+    except:
+        embed=discord.Embed(title="Support Server Link", url="https://discord.gg/DyPu726", description="```py{}```".format(error))
+        embed.set_author(name="The Following Error Ocurred ", icon_url=ctx.message.author.avatar_url)
+        embed.timestamp = datetime.datetime.utcnow()
+        embed.set_footer(text="Charlie Discord Bot" ,icon_url=bot.user.avatar_url)
+        await ctx.send(embed=embed)
+        await ctx.send('Support Server Link: https://discord.gg/DyPu726')
 
 
 async def charlie_uptime():
