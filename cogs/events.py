@@ -10,7 +10,6 @@ class Events(commands.Cog, name='Events'):
    
     @commands.Cog.listener()
     async def on_guild_join(self,guild):
-        invite = await self.bot.create_invite(destination=ctx.message.channel, xkcd = True)
         join = self.bot.get_channel(572773776039739452)
         embed=discord.Embed(title="New Server!!")
         embed.set_thumbnail(url=str(guild.icon_url))
@@ -19,7 +18,7 @@ class Events(commands.Cog, name='Events'):
         embed.add_field(name='Server Owner', value=guild.owner, inline=True)
         embed.add_field(name='Server Owner ID', value=guild.owner.id, inline=True)
         embed.add_field(name='Server Members', value=len(guild.members), inline=True)
-        embed.add_field(name='Server Invite', value=invite, inline=True)
+        #embed.add_field(name='Server Invite', value=invite, inline=True)
         await join.send(embed=embed)
 
     @commands.Cog.listener()
@@ -47,7 +46,7 @@ class Events(commands.Cog, name='Events'):
 
     @commands.Cog.listener()
     async def on_guild_remove(self,guild):
-        invite = await self.bot.create_invite(destination=ctx.message.channel, xkcd = True)
+        #invite = await self.bot.create_invite(destination=ctx.message.channel, xkcd = True)
         join = self.bot.get_channel(572773776039739452)
         embed=discord.Embed(title="Server Gone!!")
         embed.set_thumbnail(url=str(guild.icon_url))
@@ -56,7 +55,7 @@ class Events(commands.Cog, name='Events'):
         embed.add_field(name='Server Owner', value=guild.owner, inline=True)
         embed.add_field(name='Server Owner ID', value=guild.owner.id, inline=True)
         embed.add_field(name='Server Members', value=len(guild.members), inline=True)
-        embed.add_field(name='Server Invite', value=invite, inline=True)
+       # embed.add_field(name='Server Invite', value=invite, inline=True)
         await join.send(embed=embed)
 
 
