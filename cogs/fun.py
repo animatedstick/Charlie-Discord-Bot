@@ -284,7 +284,7 @@ class Fun(commands.Cog, name='Fun'):
     
  
     @commands.command(name='8ball')
-    async def ball(self , ctx , question:str=None):
+    async def ball(self , ctx ,*, question=None):
         try:
             if question is None:
                 question = "Undefined"
@@ -313,6 +313,8 @@ class Fun(commands.Cog, name='Fun'):
             embed=discord.Embed(color=ctx.author.color)
             embed.add_field(name="Question:", value=question, inline=False)
             embed.add_field(name="Anwser:", value=text, inline=True)
+            embed.timestamp = datetime.datetime.utcnow()
+            embed.set_footer(text=f"{ctx.author.name}",icon_url=str(ctx.author.avatar_url))
             await ctx.send(embed=embed)
         except:
             return
