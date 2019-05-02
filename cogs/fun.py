@@ -270,7 +270,8 @@ class Fun(commands.Cog, name='Fun'):
             embed=discord.Embed(color=0xfe8601)
             embed.set_thumbnail(url=str(ctx.author.avatar_url))
             embed.add_field(name="AFK" , value=name, inline=True)
-            embed.set_footer(text="time")
+            embed.timestamp = datetime.datetime.utcnow()
+            embed.set_footer(text=f"{ctx.author.name} | {ctx.guild.name}",icon_url=str(ctx.author.avatar_url))            
             await ctx.send(embed=embed)
             await ctx.message.delete()
           #  def check(message):
@@ -312,7 +313,6 @@ class Fun(commands.Cog, name='Fun'):
             embed=discord.Embed(color=ctx.author.color)
             embed.add_field(name="Question:", value=question, inline=False)
             embed.add_field(name="Anwser:", value=text, inline=True)
-            embed.timestamp = datetime.datetime.utcnow()
             await ctx.send(embed=embed)
         except:
             return
