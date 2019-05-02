@@ -4,27 +4,24 @@ import sys, traceback
 import datetime
 import time
 import asyncio
-import os 
 
 bot = discord.Client()
-prefix = 'c!' , 'C!' ,'charlie ','c' , '<@568492275504775178> ' 
+prefix = 'c!' , 'C!' ,'charlie ','c' , '<@568492275504775178> ' , 'd!' 
 bot = commands.Bot(command_prefix=prefix, description='A Discord Bot By the AnimatedStick#4797')
 bot.remove_command("help")
 
-minutes = 0
-hour = 0
-days = 0
+
 use = 0
+start_time = datetime.datetime.now()
 
 
 initial_extensions = ['cogs.mod',
                       'cogs.owner',
                       'cogs.fun',
                       'cogs.info',
-                      'cogs.events',
+                      'cogs.calc',
                       'cogs.tanki',
-                      'cogs.help',
-                      'cogs.events']
+                      'cogs.help']
                       
 
 async def status_task():
@@ -33,9 +30,22 @@ async def status_task():
        await asyncio.sleep(10)
        await bot.change_presence(activity=discord.Game(name="c!help | {:,} Servers".format(len(bot.guilds)), type=3))
        await asyncio.sleep(10)
-       await bot.change_presence(activity=discord.Game(name="c!help | Join Our Discord!".format(len(set(bot.get_all_members())))))
+       await bot.change_presence(activity=discord.Game(name="c!help | Join Our Discord!" ,type=3))
        await asyncio.sleep(10)
 
+def timedelta_str(dt):
+    days = dt.days
+    hours, r = divmod(dt.seconds, 3600)
+    minutes, sec = divmod(r, 60)
+
+    if minutes == 1 and sec == 1:
+        return '**{0}** Days, **{1}** Hours, **{2}** Minute and **{3}** Second.'.format(days,hours,minutes,sec)
+    elif minutes > 1 and sec == 1:
+        return '**{0}** Days, **{1}** Hours, **{2}** Minutes and **{3}** Second.'.format(days,hours,minutes,sec)
+    elif minutes == 1 and sec > 1:
+        return '**{0}** Days, **{1}** Hours, **{2}** Minute and **{3}** Seconds.'.format(days,hours,minutes,sec)
+    else:
+        return '**{0}** Days, **{1}** Hours, **{2}** Minutes and **{3}** Seconds.'.format(days,hours,minutes,sec)
 
 @bot.event
 async def on_command(command):
@@ -57,7 +67,6 @@ async def bug(ctx,*,bug:str):
         await ctx.author.send('Please Mention the Bug `c!bug [bug]`')
     
     else:
-       await ctx.message.delete()
        chan = bot.get_channel(572760775530119180)
        embed=discord.Embed()
        embed.add_field(name="Bug Report!!", value=f"**User :** {ctx.author}\n**Server :** {ctx.guild.name}\n**Bug :** {bug}", inline=True)
@@ -65,12 +74,11 @@ async def bug(ctx,*,bug:str):
        await chan.send(embed=embed)
 
 @bot.command()
-async def suggest(ctx,*,sug:str):
+async def suggestion(ctx,*,sug:str):
     if sug == None:
         await ctx.author.send('Please Mention a Suggestion `c!suggest [suggestion]`')
     
     else:
-        await ctx.message.delete()
         chan = bot.get_channel(572761324359122951)
         embed=discord.Embed()
         embed.add_field(name="Suggestion!", value=f"**User :** {ctx.author}\n**Server :** {ctx.guild.name}\n**Suggestion :** {sug}", inline=True)
@@ -82,6 +90,7 @@ async def usages(ctx):
     embed=discord.Embed()
     embed.add_field(name="Usages :wrench:", value=f"**{use}** Commands Have Been Used After The Bot Restart!", inline=True)
     await ctx.send(embed=embed)
+
 # verify 560383768372838400
  #loadiungh 568851263140265992 
 @bot.command()
@@ -97,10 +106,14 @@ async def ping(ctx):
     e = discord.Embed(title="Complete!", description='Pong! {:.2f}ms {}'.format(duration , done))
     await message.edit(embed=e)
 
-@bot.command(pass_context=True)
+@bot.command()
 async def uptime(ctx):
+    """Displays bot uptime."""
+    global start_time
     embed=discord.Embed()
-    embed.add_field(name="Uptime:", value="Been Online For **|** **{0}** Day(s) **{1}** Hour(s) and **{2}** Minute(s) !".format(days , hour , minutes), inline=True)
+    embed.add_field(name="Uptime", value=timedelta_str(datetime.datetime.now() - start_time), inline=False)
+    embed.set_thumbnail(url=str(bot.user.avatar_url))
+    embed.timestamp = datetime.datetime.utcnow()
     await ctx.send(embed=embed)
 
 
@@ -130,26 +143,54 @@ async def on_command_error(ctx,error):
             await ctx.send(embed=embed)
             await ctx.send('Support Server Link: https://discord.gg/xutQNJB')
 
+@bot.event
+async def on_guild_join(guild):
+    join = bot.get_channel(572773776039739452)
+    embed=discord.Embed(title="New Server!!")
+    embed.set_thumbnail(url=str(guild.icon_url))
+    embed.add_field(name='Server Name', value=guild.name, inline=True)
+    embed.add_field(name='Server ID', value=guild.id, inline=True)
+    embed.add_field(name='Server Owner', value=guild.owner, inline=True)
+    embed.add_field(name='Server Owner ID', value=guild.owner.id, inline=True)
+    await join.send(embed=embed)
 
-async def charlie_uptime():
-    await bot.wait_until_ready()
-    global minutes
-    minutes = 0
-    global hour
-    hour = 0
-    global days
-    days = 0
-    while not bot.is_closed:
-        await asyncio.sleep(60)
-        minutes += 1
-        if minutes == 60:
-            minutes = 0
-            hour += 1
-        if hour == 24:
-            minutes = 0
-            hour = 0
-            days +=1
-bot.loop.create_task(charlie_uptime())
+@bot.event
+async def on_member_join(member):
+    server = member.guild
+    if server.id == 554641659888140308:
+        wlc = bot.get_channel(557774869719416844)
+        embed=discord.Embed(title="Welcome to the Crew!", url="https://discord.gg/9SVUNya", description=f"Welcome to the the AnimatedStick Crew Discord Server,\n {member.name} :wave:\n\nMake sure to check out the AnimatedStick YouTube Channel\nSubscribe & Support : [Channel Link](https://www.youtube.com/channel/UC0bZpIWLn_YEjkyTyvAadtQ?view_as=subscriber)\n`Have Great Time At the AnimatedStick Server`", color=0xfbb420)
+        embed.set_author(name=member.name, icon_url=str(member.avatar_url))
+        embed.set_thumbnail(url=str(member.avatar_url))
+        embed.timestamp = datetime.datetime.utcnow()
+        embed.set_footer(text=f"the AnimatedStick Crew | Welcome {member.name}!",icon_url=str(server.icon_url))
+        await wlc.send(embed=embed)
+
+    elif server.id == 567025926756499456:
+        wlc = bot.get_channel(567025926756499458)
+        embed=discord.Embed(title="Charlie Support Server!!", url="https://discord.gg/9SVUNya", description=f"Welcome to the Charlie Support Server,\n {member.name} :wave:\n\nMake sure to vote Charlie at the Discord Bot List\nVote & Support : [Link](https://www.youtube.com/channel/UC0bZpIWLn_YEjkyTyvAadtQ?view_as=subscriber)\n`Have Great Time At the Charlie Support Server`", color=0xfe8601)
+        embed.set_author(name=member.name, icon_url=str(member.avatar_url))
+        embed.set_thumbnail(url=str(member.avatar_url))
+        embed.timestamp = datetime.datetime.utcnow()
+        embed.set_footer(text=f"the AnimatedStick Crew | Welcome {member.name}!",icon_url=str(server.icon_url))
+        await wlc.send(embed=embed)
+    else:
+        return
+
+@bot.event
+async def on_guild_remove(guild):
+    join = bot.get_channel(572773776039739452)
+    embed=discord.Embed(title="Server Gone!!")
+    embed.set_thumbnail(url=str(guild.icon_url))
+    embed.add_field(name='Server Name', value=guild.name, inline=True)
+    embed.add_field(name='Server ID', value=guild.id, inline=True)
+    embed.add_field(name='Server Owner', value=guild.owner, inline=True)
+    embed.add_field(name='Server Owner ID', value=guild.owner.id, inline=True)
+    embed.add_field(name='Server Members', value=len(guild.members), inline=True)
+    await join.send(embed=embed)
+
+
+
 
 
 if __name__ == '__main__':
@@ -159,7 +200,6 @@ if __name__ == '__main__':
         except Exception as e:
             print(f'Failed to load extension {extension}.', file=sys.stderr)
             traceback.print_exc()
-
 
 
 
