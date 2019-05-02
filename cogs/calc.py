@@ -11,7 +11,7 @@ class Calculator(commands.Cog, name='Calculator'):
     async def add(self,ctx,num1:int=None,num2:int=None):
         numbers = num1 and num2
         try:
-            if numbers:
+            if numbers is None:
                 await ctx.send("Please Specify the Numbers!! `c!add [Num1] [Num2]`")
             else:
                 await ctx.send(num1 + num2)
@@ -22,7 +22,7 @@ class Calculator(commands.Cog, name='Calculator'):
     async def substract(self,ctx,num1:int,num2:int):
         numbers = num1 and num2
         try:
-            if numbers:
+            if numbers is None:
                 await ctx.send("Please Specify the Numbers!! `c!substract [Num1] [Num2]`")
             else:
                 await ctx.send(num1 - num2)
@@ -33,7 +33,7 @@ class Calculator(commands.Cog, name='Calculator'):
     async def multiply(self,ctx,num1:int,num2:int):
         numbers = num1 and num2
         try:
-            if numbers:
+            if numbers is None:
                 await ctx.send("Please Specify the Numbers!! `c!multiply [Num1] [Num2]`")
             else:
                 await ctx.send(num1 * num2)
@@ -44,7 +44,7 @@ class Calculator(commands.Cog, name='Calculator'):
     async def divide(self,ctx,num1:int,num2:int):
         numbers = num1 and num2
         try:
-            if numbers:
+            if numbers is None:
                 await ctx.send("Please Specify the Numbers!! `c!divide [Num1] [Num2]`")
             else:
                 await ctx.send(num1 / num2)
