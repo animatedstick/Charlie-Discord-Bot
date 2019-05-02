@@ -3,10 +3,54 @@ from discord.ext import commands
 import random 
 import time
 import datetime
-
+import urllib.parse , urllib.request , re
 class Information(commands.Cog, name='Information'):
     def __init__(self,bot):
         self.bot = bot
+
+    @commands.command(name="invites" , aliases = ["invs"])
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    async def inv (self ,ctx ,user:discord.Member=None):
+        uses = 0
+        invites = await ctx.guild.invites()
+        if user is None:
+            user = ctx.author
+        
+        for invite in invites:
+            if invite.inviter == ctx.message.author:
+                uses += invite.uses
+
+        embed=discord.Embed()
+        embed.add_field(name="Server Invites", value=f"**{user}** Has **{uses}** Invites!", inline=False)
+        embed.timestamp = datetime.datetime.utcnow()
+        embed.set_footer(text=f"{user.name} | {ctx.guild.name}",icon_url=str(user.avatar_url))
+        await ctx.send(embed=embed)
+
+
+    @commands.command(name="youtube" , aliases = ["yt","ytsearch"])
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    async def youtube (self ,ctx ,* ,search=None):
+        if search == None:
+            embed=discord.Embed()
+            embed.add_field(name="Search Term ?" , value="Search Term is Missing it is Required `c!youtube [Search Terms]`", inline=False)
+            await ctx.send(embed=embed)
+        else:
+            query_string = urllib.parse.urlencode({
+                'search_query' : search
+            })
+            htm_content = urllib.request.urlopen(
+                'https://www.youtube.com/results?' + query_string 
+            )
+            serach_results = re.findall('href=\"\\/watch\\?v=(.{11})',htm_content.read().decode())
+            link = 'https://www.youtube.com/watch?v=' + serach_results[0]
+            embed=discord.Embed(title="New Search", url="https://cdn.discordapp.com/attachments/557766927070658564/573555443004342302/youtube-logo-png-picture-13.png")
+            embed.set_author(name="YouTube", icon_url="https://cdn.discordapp.com/attachments/557766927070658564/573555443004342302/youtube-logo-png-picture-13.png")
+            embed.add_field(name="Search Terms", value=search, inline=False)
+            embed.add_field(name="Link", value=f"[Click Me]({link})", inline=True)
+            embed.timestamp = datetime.datetime.utcnow()
+            embed.set_footer(text=f"{ctx.author.name}",icon_url=str(ctx.author.avatar_url))
+            await ctx.send(embed=embed)
+
 
     @commands.command(name="botinfo" , aliases = ["info","binfo"])
     @commands.cooldown(1, 5, commands.BucketType.user)
@@ -30,11 +74,11 @@ class Information(commands.Cog, name='Information'):
         embed.timestamp = datetime.datetime.utcnow()
         await ctx.send(embed=embed)
 
-    @commands.command(name="links" , aliases = ["invite"])
+    @commands.command(name="links")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def links (self ,ctx):
         embed=discord.Embed(title="Links!")
-        embed.set_author(name="Charlie", icon_url="https://cdn.discordapp.com/avatars/568789990297829379/8c18c635c4933dac687e4c3c3e6e5e75.webp?size=1024")
+        embed.set_author(name="Charlie", icon_url=str(self.bot.user.avatar_url))
         embed.add_field(name="Invite Link", value="[Link](https://discordapp.com/oauth2/authorize?client_id=568492275504775178&scope=bot&permissions=8)", inline=True)
         embed.add_field(name="Support Server Link", value='[Link](https://discord.gg/XHQhCJ)', inline=True)
         embed.add_field(name="Discord Bots Server Link", value='Soon', inline=True)
@@ -46,7 +90,7 @@ class Information(commands.Cog, name='Information'):
     @commands.command(name="status" , aliases = ["membercount","stats"])
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def status (self ,ctx):
-        server = ctx.guild
+        #server = ctx.guild
         s = ctx.guild
         bots = 0
         for member in s.members:
