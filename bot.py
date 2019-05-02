@@ -4,6 +4,7 @@ import sys, traceback
 import datetime
 import time
 import asyncio
+import os
 
 bot = discord.Client()
 prefix = 'c!' , 'C!' ,'charlie ','c' , '<@568492275504775178> ' , 'd!' 
