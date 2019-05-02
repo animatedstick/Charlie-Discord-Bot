@@ -4,6 +4,7 @@ import random
 import datetime
 import time
 import aiohttp
+import asyncio
 
 class Fun(commands.Cog, name='Fun'):
     def __init__(self,bot):
@@ -42,6 +43,39 @@ class Fun(commands.Cog, name='Fun'):
             return await ctx.send("No images found.")
 
         return x.attachments[0].url
+
+    @commands.command(aliases = ["hack"])
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    async def virus(self , ctx , user:discord.Member=None):
+        lod = self.bot.get_emoji(568851263140265992)
+        done = self.bot.get_emoji(560383768372838400)
+        if user == None:
+            user = ctx.guild
+        msg = await ctx.send(f"{lod} Downloading Virus.")
+	   
+        await asyncio.sleep(1)
+        await msg.edit(content = f"{lod} Downloading Virus..")
+	   
+        await asyncio.sleep(0.5)
+        await msg.edit(content = f"{lod} Downloading Virus...")
+       
+        await asyncio.sleep(1.5)
+        await msg.edit(content = f"{lod} Packing Files.")
+	   
+        await asyncio.sleep(1.2)
+        await msg.edit(content = f"{lod} Packing Files..")
+	   
+        await asyncio.sleep(1)
+        await msg.edit(content = f"{lod} Installing.")
+	   
+        await asyncio.sleep(1.5)
+        await msg.edit(content = f"{lod} Installation Complete.")
+	   
+        await asyncio.sleep(2)
+        await msg.edit(content = f"{lod} Running Setup!")
+       
+        await asyncio.sleep(1)
+        await msg.edit(content = f"**{user}** Was Hacked Successfully! {done}")
 
 
     @commands.command()
@@ -234,18 +268,18 @@ class Fun(commands.Cog, name='Fun'):
         elif "@here" in name: return
         else:
             embed=discord.Embed(color=0xfe8601)
-            embed.set_thumbnail(url="https://cog-creators.github.io/discord-embed-sandbox/")
-            embed.add_field(name=AFK , value=undefined, inline=True)
+            embed.set_thumbnail(url=str(ctx.author.avatar_url))
+            embed.add_field(name="AFK" , value=name, inline=True)
             embed.set_footer(text="time")
             await ctx.send(embed=embed)
             await ctx.message.delete()
-            def check(message):
-                 return ctx.message.author
-            await self.bot.wait_for('message', check=check)
+          #  def check(message):
+           #      return ctx.message.author
+           # await self.bot.wait_for('message', check=check)
           # await self.bot.wait_for_message(author=ctx.message.author)
-            embed=discord.Embed()
-            embed.add_field(name="{} is Now Back! :wave:".format(ctx.message.author.name), value="**{}**, Welcome Back !".format(ctx.message.author.name), inline=False)
-            await ctx.send(embed=embed)
+           # embed=discord.Embed()
+            #embed.add_field(name="{} is Now Back! :wave:".format(ctx.message.author.name), value="**{}**, Welcome Back !".format(ctx.message.author.name), inline=False)
+           # await ctx.send(embed=embed)
     
  
     @commands.command(name='8ball')
@@ -278,6 +312,7 @@ class Fun(commands.Cog, name='Fun'):
             embed=discord.Embed(color=ctx.author.color)
             embed.add_field(name="Question:", value=question, inline=False)
             embed.add_field(name="Anwser:", value=text, inline=True)
+            embed.timestamp = datetime.datetime.utcnow()
             await ctx.send(embed=embed)
         except:
             return
