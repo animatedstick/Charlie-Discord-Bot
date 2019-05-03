@@ -4,6 +4,8 @@ import random
 import time
 import datetime
 import urllib.parse , urllib.request , re
+import requests
+
 class Information(commands.Cog, name='Information'):
     def __init__(self,bot):
         self.bot = bot
