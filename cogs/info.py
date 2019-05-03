@@ -8,6 +8,27 @@ class Information(commands.Cog, name='Information'):
     def __init__(self,bot):
         self.bot = bot
 
+    @commands.command(name="bitcoin" , aliases = ["bcoin" , "btc"])
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    async def bitc (self ,ctx,currency:str=None):
+        try:
+            if currency is None:
+                currency = 'USD'
+        
+            #btc = self.bot.get_emoji(573731025126031370)
+            url = 'https://blockchain.info/ticker'
+            resp = requests.get(url)
+            btc = resp.json()[currency]
+            price = btc['symbol'] + ' ' + str(btc['last'])
+            embed=discord.Embed()
+            embed.add_field(name=":dollar: Current Bit Coin Price", value=f"{currency} : **{price}**", inline=False)
+            embed.timestamp = datetime.datetime.utcnow()
+            embed.set_footer(text=f"{ctx.author.name} | {ctx.guild.name}",icon_url=str(ctx.author.avatar_url))            
+            await ctx.send(embed=embed)            
+        except:
+            await ctx.send(f"`{currency}` is Not in Our Database :(")            
+          
+          
     @commands.command(name="invites" , aliases = ["invs"])
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def inv (self ,ctx ,user:discord.Member=None):
