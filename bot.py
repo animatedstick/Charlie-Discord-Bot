@@ -7,7 +7,7 @@ import asyncio
 import os
 
 bot = discord.Client()
-prefix = 'c!' , 'C!' ,'charlie ','c' , '<@568492275504775178> ' , 'd!' 
+prefix = 'c!' , 'C!' ,'charlie ','c' , '<@568492275504775178> ' 
 bot = commands.Bot(command_prefix=prefix, description='A Discord Bot By the AnimatedStick#4797')
 bot.remove_command("help")
 
