@@ -100,7 +100,7 @@ class Information(commands.Cog, name='Information'):
         embed.timestamp = datetime.datetime.utcnow()
         await ctx.send(embed=embed)
 
-    @commands.command(name="links")
+    @commands.command(name="links", aliases = ["invite"])
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def links (self ,ctx):
         embed=discord.Embed(title="Links!")
