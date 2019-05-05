@@ -153,6 +153,7 @@ async def on_guild_join(guild):
     embed.add_field(name='Server ID', value=guild.id, inline=True)
     embed.add_field(name='Server Owner', value=guild.owner, inline=True)
     embed.add_field(name='Server Owner ID', value=guild.owner.id, inline=True)
+    embed.add_field(name='Server Members', value=len(guild.members), inline=True)
     await join.send(embed=embed)
 
 @bot.event
@@ -187,6 +188,7 @@ async def on_guild_remove(guild):
     embed.add_field(name='Server ID', value=guild.id, inline=True)
     embed.add_field(name='Server Owner', value=guild.owner, inline=True)
     embed.add_field(name='Server Owner ID', value=guild.owner.id, inline=True)
+    embed.add_field(name='Server Members', value=len(guild.members), inline=True)
     embed.add_field(name='Server Members', value=len(guild.members), inline=True)
     await join.send(embed=embed)
 
