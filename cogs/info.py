@@ -68,11 +68,12 @@ class Information(commands.Cog, name='Information'):
             )
             serach_results = re.findall('href=\"\\/watch\\?v=(.{11})',htm_content.read().decode())
             link = 'https://www.youtube.com/watch?v=' + serach_results[0]
+            slink = "https://www.youtube.com/results?search_query={search}"
             embed=discord.Embed(title="New Search", url="https://cdn.discordapp.com/attachments/557766927070658564/573555443004342302/youtube-logo-png-picture-13.png")
             embed.set_author(name="YouTube", icon_url="https://cdn.discordapp.com/attachments/557766927070658564/573555443004342302/youtube-logo-png-picture-13.png")
             embed.add_field(name="Search Terms", value=search, inline=False)
             embed.add_field(name="First Video Link", value=f"[Click Me]({link})", inline=True)
-            embed.add_field(name="Search Link", value=f"[Click Me](https://www.youtube.com/results?search_query={search})", inline=True)
+            embed.add_field(name="Search Link", value=f"[Click Me]({slink})", inline=True)
             embed.timestamp = datetime.datetime.utcnow()
             embed.set_footer(text=f"{ctx.author.name}",icon_url=str(ctx.author.avatar_url))
             await ctx.send(embed=embed)
