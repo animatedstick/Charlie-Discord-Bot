@@ -44,10 +44,10 @@ class Fortnite(commands.Cog, name='Fortnite'):
                 embed.add_field(name="K/D", value=kd, inline=True)
                 embed.set_footer(text=f"Fortnite Stats For {words}",icon_url=str(ctx.author.avatar_url))
                 await ctx.send(embed=embed)
-            else:
-                embed=discord.Embed()
-                embed.add_field(name="Nickname Invalid", value="The Nickname is Invalid , Double Check Your Spellings!", inline=True)
-                await ctx.send(embed=embed)
+           # else:
+           #     embed=discord.Embed()
+           #     embed.add_field(name="Nickname Invalid", value="The Nickname is Invalid , Double Check Your Spellings!", inline=True)
+           #     await ctx.send(embed=embed)
 
 def fortnite_tracker_api(platform, nickname):
   URL = 'https://api.fortnitetracker.com/v1/profile/' + platform + '/' + nickname
