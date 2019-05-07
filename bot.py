@@ -23,7 +23,7 @@ initial_extensions = ['cogs.mod',
                       'cogs.calc',
                       'cogs.tanki',
                       'cogs.help',
-                      'cogs.fort]
+                      'cogs.fort']
                       
 
 async def status_task():
