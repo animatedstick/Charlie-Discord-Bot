@@ -6,7 +6,7 @@ import requests
 import os
 
 
-FORTNITE_API_TOKEN = os.getenv("FT_TOKEN")
+FORTNITE_API_TOKEN = "6915c82b-34ef-4bf3-bd25-896c470ee0c3"
 
 class Fortnite(commands.Cog, name='Fortnite'):
     def __init__(self,bot):
@@ -44,10 +44,10 @@ class Fortnite(commands.Cog, name='Fortnite'):
                 embed.add_field(name="K/D", value=kd, inline=True)
                 embed.set_footer(text=f"Fortnite Stats For {words}",icon_url=str(ctx.author.avatar_url))
                 await ctx.send(embed=embed)
-           # else:
-           #     embed=discord.Embed()
-           #     embed.add_field(name="Nickname Invalid", value="The Nickname is Invalid , Double Check Your Spellings!", inline=True)
-           #     await ctx.send(embed=embed)
+            else:
+                embed=discord.Embed()
+                embed.add_field(name="Nickname Invalid", value="The Nickname is Invalid , Double Check Your Spellings!", inline=True)
+                await ctx.send(embed=embed)
 
 def fortnite_tracker_api(platform, nickname):
   URL = 'https://api.fortnitetracker.com/v1/profile/' + platform + '/' + nickname
