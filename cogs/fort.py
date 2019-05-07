@@ -6,7 +6,7 @@ import requests
 import os
 
 
-FORTNITE_API_TOKEN = "6915c82b-34ef-4bf3-bd25-896c470ee0c3"
+FORTNITE_API_TOKEN = os.getenv('FT_TOKEN')
 
 class Fortnite(commands.Cog, name='Fortnite'):
     def __init__(self,bot):
