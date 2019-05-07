@@ -48,13 +48,12 @@ class Fun(commands.Cog, name='Fun'):
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def meme(self, ctx):
         title = ["Dad, can you put my shoes on? I don't think they'll fit me.", "Toasters were the first form of pop-up notifications.", "What do you get hanging from Apple trees? Sore arms.", "Atheism is a non-prophet organisation.", "Why do mathematicians hate the U.S.? Because it's indivisible.", "Can February march? No, but April may.", "What does a female snake use for support? A co-Bra!", "What do you call a boomerang that won't come back? A stick.", "Why did the coffee file a police report? It got mugged.", "Why did the girl smear peanut butter on the road? To go with the traffic jam.", "A bartender broke up with her boyfriend, but he kept asking her for another shot.", "How many apples grow on a tree? All of them!"]
-        embed = discord.Embed(title=f'Meme Requested By {ctx.author}', description=random.choice(title))
+        embed = discord.Embed(title='Meme', description=random.choice(title))
         async with aiohttp.ClientSession() as session:
             async with session.get("https://api.reddit.com/r/Discordmemes/random") as r:
                 data = await r.json()
                 embed.set_image(url=data[0]["data"]["children"][0]["data"]["url"])
-                embed.set_thumbnail(url=ctx.message.author.avatar_url)
-                #embed.set_footer(text=f'{random.choice(ml)} | {random.choice(co)}', icon_url=f'{ctx.message.author.avatar_url}')
+                embed.set_footer(text=f'Meme Requested By {ctx.author}', icon_url=f'{ctx.message.author.avatar_url}')
                 embed.timestamp = datetime.datetime.utcnow()
                 await ctx.send(embed=embed)
 
