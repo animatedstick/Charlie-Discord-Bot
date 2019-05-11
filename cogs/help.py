@@ -69,7 +69,7 @@ class Help(commands.Cog, name='Help'):
         elif plug == 'other':
             embed=discord.Embed(title="Help & Support!", url="https://cdn.discordapp.com/avatars/568789990297829379/8c18c635c4933dac687e4c3c3e6e5e75.webp?size=1024", color=0xf4800b)
             embed.set_author(name="Charlie", icon_url="https://discordapp.com/api/users/568789990297829379/avatars/8c18c635c4933dac687e4c3c3e6e5e75.jpg")
-            embed.add_field(name="Other Commands", value="`c!help` - Shows Help Message\n`c!uptime` - Check the Bot's Uptime\n`c!usages` - Check How Many Commands Have Been Used After Reboot\n\n**More Commands Coming Soon!**", inline=False)
+            embed.add_field(name="Other Commands", value="`c!help` - Shows Help Message\n`c!bug [Bug]` - Reports a Bug On the Bot!\n`c!suggestion [Suggestion]`-  Send a Suggestion to the Bot Owners\n`c!uptime` - Check the Bot's Uptime\n`c!usages` - Check How Many Commands Have Been Used After Reboot\n\n**More Commands Coming Soon!**", inline=False)
             embed.set_footer(text="Charlie Help & Support!",icon_url=str(ctx.message.author.avatar_url))
             embed.timestamp = datetime.datetime.utcnow()
             await ctx.send(embed=embed) 
