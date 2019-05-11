@@ -176,18 +176,21 @@ async def on_member_join(member):
         await wlc.send(embed=embed)
 
     elif server.id == 572346295830970370:
+        newrole = discord.utils.get(member.guild.roles, name="Users")
+        await member.add_roles(newrole)
         wlc = bot.get_channel(572761367933747200)
-        embed=discord.Embed(title="Charlie Support Server!!", url="https://discord.gg/9SVUNya", description=f"Welcome to the Charlie Support Server,\n {member.name} :wave:\n\nMake sure to vote Charlie at the Discord Bot List\nVote & Support : [Link](https://www.youtube.com/channel/UC0bZpIWLn_YEjkyTyvAadtQ?view_as=subscriber)\n`Have Great Time At the Charlie Support Server`", color=0xfe8601)
+        embed=discord.Embed(title="Charlie Support Server!", url="https://discord.gg/9SVUNya", description=f"Welcome to the Charlie Support Server,\n {member.name} :wave:\n\nMake sure to vote Charlie at the Discord Bot List\nVote & Support : [Link](https://www.youtube.com/channel/UC0bZpIWLn_YEjkyTyvAadtQ?view_as=subscriber)\n`Have Great Time At the Charlie Support Server`", color=0xfe8601)
         embed.set_author(name=member.name, icon_url=str(member.avatar_url))
         embed.set_thumbnail(url=str(member.avatar_url))
         embed.timestamp = datetime.datetime.utcnow()
         embed.set_footer(text=f"Charlie Support Server | Welcome {member.name}!",icon_url=str(server.icon_url))
         await wlc.send(embed=embed)
+        
         wembed=discord.Embed(title="Welcome To The Support Server ", url="https://discordapp.com/oauth2/authorize?client_id=568492275504775178&scope=bot&permissions=8", description="\n\n\n Hey There {user},\nThanks You For Joining Our Support Server!\nMake Sure to Vote & Share Our Bot to Others :wink:\n\n:link: **Invite Link:** [Link](https://discordapp.com/oauth2/authorize?client_id=568492275504775178&scope=bot&permissions=8)\n**Discord Bot List Vote:** [Link](https://discordbots.org/bot/568492275504775178\n\nThanks For Using Our Bot! Have a Nice Day! :tada:    ", color=0xfa9205)
         wembed.set_author(name="Charlie", icon_url=str(bot.user.avatar_url))
         wembed.timestamp = datetime.datetime.utcnow()
         wembed.set_footer(text=f"{member}",icon_url=str(member.avatar_url))
-        await member.send(wembed=embed)
+        await member.send(embed=wembed)
     else:
         return
 
