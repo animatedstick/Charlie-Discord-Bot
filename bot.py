@@ -72,8 +72,11 @@ async def bug(ctx,*,bug:str):
        chan = bot.get_channel(572760775530119180)
        embed=discord.Embed()
        embed.add_field(name="Bug Report!!", value=f"**User :** {ctx.author}\n**Server :** {ctx.guild.name}\n**Bug :** {bug}", inline=True)
+       embed.set_thumbnail(url=str(ctx.author.avatar_url))
        embed.timestamp = datetime.datetime.utcnow()
        await chan.send(embed=embed)
+       await ctx.message.delete()
+       await ctx.send(f':tada: Your Bug Report Was Sucessfully Sent! , {ctx.author.mention}')
 
 @bot.command()
 async def suggestion(ctx,*,sug:str):
@@ -84,8 +87,11 @@ async def suggestion(ctx,*,sug:str):
         chan = bot.get_channel(572761324359122951)
         embed=discord.Embed()
         embed.add_field(name="Suggestion!", value=f"**User :** {ctx.author}\n**Server :** {ctx.guild.name}\n**Suggestion :** {sug}", inline=True)
+        embed.set_thumbnail(url=str(ctx.author.avatar_url))
         embed.timestamp = datetime.datetime.utcnow()
         await chan.send(embed=embed)
+        await ctx.message.delete()
+        await ctx.send(f':tada: Your Suggestion Was Sucessfully Sent! , {ctx.author.mention}')
 
 @bot.command()
 async def usages(ctx):
