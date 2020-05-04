@@ -1,6 +1,2 @@
-# Hello There Buddy!
-Some Random Code XD
-
-<a href="https://discordbots.org/bot/568492275504775178" >
-  <img src="https://discordbots.org/api/widget/568492275504775178.svg" alt="Charlie" />
-</a>
+# Charlie Discord Bot Source Code!
+Note: Only use this code for personal usage...
