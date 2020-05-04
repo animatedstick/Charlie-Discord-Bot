@@ -28,11 +28,11 @@ initial_extensions = ['cogs.mod',
 
 async def status_task():
     while True:
-       await bot.change_presence(activity=discord.Game(name="c!help | {:,} Users ".format(len(set(bot.get_all_members()))), type=3))
+       await bot.change_presence(activity=discord.Game(name="c!helsp | {:,} Users ".format(len(set(bot.get_all_members()))), type=3))
        await asyncio.sleep(10)
-       await bot.change_presence(activity=discord.Game(name="c!help | {:,} Servers".format(len(bot.guilds)), type=3))
+       await bot.change_presence(activity=discord.Game(name="c!helsp | {:,} Servers".format(len(bot.guilds)), type=3))
        await asyncio.sleep(10)
-       await bot.change_presence(activity=discord.Game(name="c!help | Join Our Discord!" ,type=3))
+       await bot.change_presence(activity=discord.Game(name="c!helsp | Join Our Discord!" ,type=3))
        await asyncio.sleep(10)
 
 def timedelta_str(dt):
